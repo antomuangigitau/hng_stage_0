@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A clean, accessible, and testable Todo Item Card component with modern design." />
+    <title>Todo Item Card</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="page-wrapper">
+      <h1 class="page-title">My Tasks</h1>
+
+      <article
+        class="todo-card"
+        data-testid="test-todo-card"
+        aria-label="Todo task card">
+        <div class="card-header">
+          <div class="card-header-left">
+            <span
+              class="badge badge--priority badge--high"
+              data-testid="test-todo-priority"
+              aria-label="Priority: High">
+              🔥 High
+            </span>
+            <span
+              class="badge badge--status badge--in-progress"
+              data-testid="test-todo-status"
+              aria-label="Status: In Progress">
+              In Progress
+            </span>
+          </div>
+          <div class="card-header-right">
+            <button
+              class="icon-btn"
+              data-testid="test-todo-edit-button"
+              aria-label="Edit task"
+              type="button">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true">
+                <path
+                  d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                <path
+                  d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+              </svg>
+            </button>
+            <button
+              class="icon-btn icon-btn--danger"
+              data-testid="test-todo-delete-button"
+              aria-label="Delete task"
+              type="button">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true">
+                <polyline points="3 6 5 6 21 6" />
+                <path
+                  d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                <line x1="10" y1="11" x2="10" y2="17" />
+                <line x1="14" y1="11" x2="14" y2="17" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="card-title-row">
+          <div class="checkbox-wrapper">
+            <input
+              type="checkbox"
+              id="todo-complete"
+              class="todo-checkbox"
+              data-testid="test-todo-complete-toggle"
+              aria-label="Mark task as complete" />
+            <label for="todo-complete" class="checkbox-visual">
+              <svg
+                class="check-icon"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </label>
+          </div>
+          <h2 class="todo-title" data-testid="test-todo-title">
+            Redesign the dashboard layout
+          </h2>
+        </div>
+
+        <p class="todo-description" data-testid="test-todo-description">
+          Revamp the main dashboard with updated charts, cleaner navigation, and
+          a refreshed color palette. Ensure mobile responsiveness and
+          accessibility compliance.
+        </p>
+
+        <div class="card-dates">
+          <time
+            class="due-date"
+            data-testid="test-todo-due-date"
+            id="due-date-el">
+          </time>
+          <span
+            class="time-remaining"
+            data-testid="test-todo-time-remaining"
+            id="time-remaining-el"
+            aria-live="polite">
+          </span>
+        </div>
+
+        <ul
+          class="tag-list"
+          role="list"
+          data-testid="test-todo-tags"
+          aria-label="Task tags">
+          <li class="tag tag--work" data-testid="test-todo-tag-work">work</li>
+          <li class="tag tag--urgent" data-testid="test-todo-tag-urgent">
+            urgent
+          </li>
+          <li class="tag tag--design" data-testid="test-todo-tag-design">
+            design
+          </li>
+        </ul>
+      </article>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
