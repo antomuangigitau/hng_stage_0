@@ -128,7 +128,7 @@ body::before {
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid var(--bg-card-border);
   border-radius: var(--border-radius);
-  padding: 28px;
+  padding: 28px 28px 28px 36px;
   box-shadow:
     0 4px 24px rgba(0, 0, 0, 0.25),
     0 0 80px var(--bg-card-glow);
@@ -173,6 +173,57 @@ body::before {
     rgba(102, 187, 106, 0.3),
     transparent
   );
+}
+
+.todo-card.is-in-progress {
+  border-color: var(--status-progress-border);
+}
+
+.todo-card.is-in-progress::before {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(66, 165, 245, 0.3),
+    transparent
+  );
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.priority-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  border-radius: 4px 0 0 4px;
+  transition:
+    background var(--transition),
+    box-shadow var(--transition);
+  z-index: 1;
+}
+
+.priority-indicator--high {
+  background: var(--priority-high-text);
+  box-shadow:
+    0 0 12px rgba(255, 75, 75, 0.4),
+    0 0 24px rgba(255, 75, 75, 0.15);
+}
+
+.priority-indicator--medium {
+  background: var(--priority-medium-text);
+  box-shadow:
+    0 0 12px rgba(255, 183, 77, 0.4),
+    0 0 24px rgba(255, 183, 77, 0.15);
+}
+
+.priority-indicator--low {
+  background: var(--priority-low-text);
+  box-shadow:
+    0 0 12px rgba(102, 187, 106, 0.4),
+    0 0 24px rgba(102, 187, 106, 0.15);
 }
 
 .card-header {
@@ -332,6 +383,32 @@ body::before {
 
 .todo-card.is-done .todo-description {
   color: var(--text-muted);
+}
+
+.btn--click {
+  display: inline;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 4px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color var(--transition);
+}
+
+.btn--click:hover {
+  color: var(--accent-light);
+}
+
+.btn--click:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: 4px;
 }
 
 .card-dates {
@@ -509,6 +586,226 @@ body::before {
 
 .todo-card {
   animation: fadeIn 0.5s ease-out;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.status-control {
+  display: inline-flex;
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.status-control__radio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.status-control__label {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 14px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.status-control__label:hover {
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.status-control__radio:checked + .status-control__label--pending {
+  background: var(--status-pending-bg);
+  color: var(--status-pending-text);
+  box-shadow: inset 0 0 0 1px rgba(158, 158, 158, 0.2);
+}
+
+.status-control__radio:checked + .status-control__label--in-progress {
+  background: var(--status-progress-bg);
+  color: var(--status-progress-text);
+  box-shadow: inset 0 0 0 1px var(--status-progress-border);
+}
+
+.status-control__radio:checked + .status-control__label--done {
+  background: var(--status-done-bg);
+  color: var(--status-done-text);
+  box-shadow: inset 0 0 0 1px rgba(102, 187, 106, 0.3);
+}
+
+.status-control__radio:focus-visible + .status-control__label {
+  box-shadow: var(--focus-ring);
+  z-index: 1;
+}
+
+/* Edit Form */
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.edit-form[hidden] {
+  display: none;
+}
+
+.edit-form__heading {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.edit-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.edit-form__label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.edit-form__input,
+.edit-form__textarea,
+.edit-form__select {
+  width: 100%;
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-sm);
+  outline: none;
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition),
+    background var(--transition);
+}
+
+.edit-form__input:focus,
+.edit-form__textarea:focus,
+.edit-form__select:focus {
+  border-color: var(--accent);
+  box-shadow: var(--focus-ring);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.edit-form__input::placeholder,
+.edit-form__textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.edit-form__textarea {
+  resize: vertical;
+  min-height: 72px;
+  line-height: 1.55;
+}
+
+.edit-form__select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239d9db8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+
+.edit-form__input[type="date"] {
+  color-scheme: dark;
+}
+
+.edit-form__row {
+  display: flex;
+  gap: 14px;
+}
+
+.edit-form__actions {
+  display: flex;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+.edit-form__btn {
+  flex: 1;
+  padding: 10px 20px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: all var(--transition);
+  letter-spacing: 0.02em;
+}
+
+.edit-form__btn--save {
+  background: var(--accent);
+  color: #fff;
+}
+
+.edit-form__btn--save:hover {
+  background: var(--accent-light);
+  box-shadow: 0 4px 18px rgba(124, 106, 255, 0.35);
+}
+
+.edit-form__btn--save:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.edit-form__btn--cancel {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.edit-form__btn--cancel:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.edit-form__btn--cancel:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+@media (max-width: 480px) {
+  .edit-form__row {
+    flex-direction: column;
+  }
 }
 
 ::-webkit-scrollbar {
